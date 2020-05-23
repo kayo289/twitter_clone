@@ -1,5 +1,6 @@
 # twitter_clone
 DjangoでtwitterみたいなSNSを作成
+testで編集した
 
 要件的意義 
 * https://github.com/kayo289/twitter_clone/wiki/%E6%A9%9F%E8%83%BD%E8%A6%81%E4%BB%B6
