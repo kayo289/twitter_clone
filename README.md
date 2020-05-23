@@ -10,5 +10,6 @@ DjangoでtwitterみたいなSNSを作成
 データベース 
 * https://app.diagrams.net/#G1G8VnnqDl4WviYU-HXyPO1rh_hIYJllny  
 
-Python 3.6.9
-Django 3.0.6
+Python 3.6.9 
+Django 3.0.6 
+ 
