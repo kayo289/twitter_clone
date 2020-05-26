@@ -16,10 +16,6 @@ class FollowModel(models.Model):
     user_id = models.IntegerField()
     follow_id = models.IntegerField()
 
-class FollowerwModel(models.Model):
-    user_id = models.IntegerField()
-    follower_id = models.IntegerField()
-
 class IntoroductionModel(models.Model):
     user_id = models.IntegerField()
     introduction = models.TextField(max_length = 140)
