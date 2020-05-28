@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-def aaa():
-    return 'a'
-
 def signupfunc(request):
     # user2 = User.objects.all()
     if request.method == 'POST':
