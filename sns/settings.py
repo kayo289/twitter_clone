@@ -123,3 +123,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 画像にアクセスするurlらしい。画像と対応
+MEDIA_URL = '/medi/'
+
+LOGIN_URL = 'login'

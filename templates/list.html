@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'signup.css'%}"> {% endcomment %}
+{% endblock customcss %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+        </div>
+
+        <div class="col-6">
+            {% for post in posts %}
+            <div class="card mb-4">
+                <img src="{{post.images.url}}" class = "img-fluid"> 
+                <div class="card-body">
+                    <h5 class="card-title">username: {{ post.user.username }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <a href="#" class="btn btn-primary">いいね</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-3 offset-1">
+           current_user: {{current_user.username}}
+           profile: {{profile.url}}
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
