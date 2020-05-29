@@ -40,7 +40,7 @@ def index_post(request):
     params = {
         'posts': PostModel.objects.all(),
         'current_user': request.user,
-        'profile': IntoroductionModel.objects.get(user=request.user)
+        # 'profile': IntoroductionModel.objects.get(user=request.user)
     }
     return render(request, 'list.html', params)
 
