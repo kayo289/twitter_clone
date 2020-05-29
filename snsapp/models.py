@@ -21,3 +21,4 @@ class IntoroductionModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     introduction = models.TextField(max_length = 140)
     url = models.URLField(max_length=200)
+    profile_icon = models.ImageField(upload_to="user")
