@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .models import PostModel
+from .models import PostModel, IntoroductionModel
 
 # Create your views here.
 def signupfunc(request):
@@ -37,6 +37,10 @@ def loginfunc(request):
 
 def index_post(request):
     posts = PostModel.objects.all()
-    params = {'posts': PostModel.objects.all()}
+    params = {
+        'posts': PostModel.objects.all(),
+        'current_user': request.user,
+        'profile': IntoroductionModel.objects.get(user=request.user)
+    }
     return render(request, 'list.html', params)
 
