@@ -6,6 +6,7 @@ class PostModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(max_length = 140)
     images = models.ImageField(upload_to="post", blank=True, null=True)
+    like_num = models.IntegerField(default=0)
 
 class GoodModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
