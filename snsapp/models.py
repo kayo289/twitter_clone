@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser,User
 
 # Create your models here.
 class PostModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(max_length = 140)
-    images = models.ImageField(upload_to="post")
+    images = models.ImageField(upload_to="post", blank=True, null=True)
 
 class GoodModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,8 +16,8 @@ class FollowModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     follow_id = models.IntegerField()
 
-class IntoroductionModel(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class ProfileModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True,related_name="profile")
     introduction = models.TextField(max_length = 140)
     url = models.URLField(max_length=200)
-    profile_icon = models.ImageField(upload_to="user", blank=True, null=True)
+    profile_icon = models.ImageField(upload_to="user")
