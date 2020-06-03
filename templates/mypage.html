@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'signup.css'%}"> {% endcomment %}
+{% endblock customcss %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <img src="{current_user.profile_icon.url}" class="rounded" >
+          </div>
+        <div class="col-3 offset-1">
+            current_user: {{current_user.username}}
+            profile: {{current_user.profile.url}}
+         </div> 
+        user.id = {{user.id}}
+        current_user.id = {{current_user.id}}
+        {% if user.id == current_user.id %}
+            <a href="#" class="btn btn-primary">プロフィールを編集する</a>
+         {% else %}
+            {%if follow %}
+                <a href="#" class="btn btn-primary">follow外す</a>
+            {% else %}
+                <a href="#" class="btn btn-primary">followする</a>
+            {% endif %}
+        {% endif %}
+         <div class="col-6  offset-1">
+            {% for post in post %}
+            <div class="card mb-4">
+                {% if post.images %}
+                    <img src="{{post.images.url}}" class = "img-fluid"> 
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">username: {{ post.user }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                    <a href="#" class="btn btn-primary">いいね</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
