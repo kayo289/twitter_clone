@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import PostModel, ProfileModel
+from django.views.generic import UpdateView
+
+class profile_edit(UpdateView):
+  template_name = 'profile-edit.html'
+  model = ProfileModel
+  fields = ('user','introduction','url','profile_icon')
 
 # Create your views here.
 def signupfunc(request):
