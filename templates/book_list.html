@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ListViewサンプル</title>
+</head>
+
+<body>
+
+    <table border="1">
+        <tr>
+            <th>title</th>
+            <th>author</th>
+        </tr>
+        {% for book in object_list %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
