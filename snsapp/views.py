@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
 from django.views.generic import CreateView
@@ -18,14 +18,14 @@ def signupfunc(request):
         if User.objects.filter(username = user_name, email=user_email, password=user_password).exists():
             # 複数条件を利用したいからfilterを利用
             User.objects.filter(email=user_email, password=user_password)
-            return render(request, 'signup.html', {'error': 'このユーザーは登録されています'})
+            return render(request, 'signup.html')
 
         user = User.objects.create_user(user_name, user_email, user_password)
         ProfileModel.objects.create(user=user)
         user = authenticate(request, username=user_name, password=user_password)
         login(request, user)
-        return render(request, 'signup.html', {'error': 'ログイン成功'}) #ログインが成功した時の画面移動先
-    return render(request, 'signup.html', {'error': 'こないはず'}) #これがないとエラーが出る。Djangoの仕様かもしれない
+        return redirect('index_post')#ログインが成功した時の画面移動先
+    return render(request, 'signup.html') #これがないとエラーが出る。Djangoの仕様かもしれない
 
 def loginfunc(request):
     if request.method == 'POST':
@@ -37,9 +37,11 @@ def loginfunc(request):
             login(request, user)
             return redirect('signup')
         else:
-            return redirect('login')# ログイン成功後の遷移先
+            return redirect('index_post')# ログイン成功後の遷移先
     return render(request,'login.html')
-
+def logoutfunc(request):
+    logout(request)
+    return redirect('login')
 @login_required
 def index_post(request):
     items = FollowModel.objects.filter(user=request.user)
