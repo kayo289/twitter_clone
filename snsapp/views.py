@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def signupfunc(request):
@@ -49,6 +51,18 @@ def index_post(request):
         'profile': ProfileModel.objects.get(user=request.user)
     }
     return render(request, 'list.html', params)
+
+class create_posts(CreateView):
+    template_name='create.html'
+    model = PostModel
+    fields = {'content','images','like_num'}
+    success_url = reverse_lazy('index_post')
+    def form_valid(self, form):
+        print("はいった")
+        form.instance.user = self.request.user
+        return super(create_posts, self).form_valid(form)
+    
+
 #mypage
 def mypage(request,pk):
    
