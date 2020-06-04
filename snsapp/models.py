@@ -19,6 +19,6 @@ class FollowModel(models.Model):
 
 class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True,related_name="profile")
-    introduction = models.TextField(max_length = 140)
-    url = models.URLField(max_length=200)
-    profile_icon = models.ImageField(upload_to="user")
+    introduction = models.TextField(max_length = 140,blank=True, null=True)
+    url = models.URLField(max_length=200,blank=True, null=True)
+    profile_icon = models.ImageField(upload_to="user",blank=True, default='user/default.png')

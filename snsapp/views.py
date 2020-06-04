@@ -20,7 +20,8 @@ def signupfunc(request):
             User.objects.filter(email=user_email, password=user_password)
             return render(request, 'signup.html', {'error': 'このユーザーは登録されています'})
 
-        User.objects.create_user(user_name, user_email, user_password)
+        user = User.objects.create_user(user_name, user_email, user_password)
+        ProfileModel.objects.create(user=user)
         user = authenticate(request, username=user_name, password=user_password)
         login(request, user)
         return render(request, 'signup.html', {'error': 'ログイン成功'}) #ログインが成功した時の画面移動先
