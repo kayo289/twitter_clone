@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5 class="card-title">username: {{ post.user }}</h5>
                     <p class="card-text">{{ post.content }}</p>
-                    <a href="#" class="btn btn-primary">いいね</a>
+                    <a href="{%url 'good' post.id %}" class="btn btn-primary">いいね:{{post.like_num}}</a>
                 </div>
             </div>
             {% endfor %}

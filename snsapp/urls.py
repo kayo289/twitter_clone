@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import mypage, signupfunc, loginfunc, index_post,followfunc,follow_delete
+from .views import mypage, signupfunc, loginfunc, index_post,followfunc,follow_delete,goodfunc
 
 #signupfunc, loginfunc, index_post ,
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('mypage/<int:pk>', mypage,name="mypage"),
     path('follow/<int:pk>',followfunc,name='follow'),
     path('follow_delete/<int:pk>',follow_delete,name='follow_delete'),
+    path('good/<int:pk>',goodfunc,name='good'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

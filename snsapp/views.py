@@ -69,5 +69,20 @@ def follow_delete(request,pk):
     return redirect('mypage',pk=pk)
     #return render(request,'follow.html', params)
 
+def goodfunc(request,pk):
+    post=PostModel.objects.get(id=pk)
+    post2=GoodModel.objects.all().filter(post=post,user=request.user)
+    print(request)
+    if post2  :
+        post.like_num-=1 
+        post.save()
+        GoodModel.objects.filter(user=request.user,post=post,count=1).delete()
+        return redirect(request.META['HTTP_REFERER'],pk=post.user.id)
+    else :
+        post.like_num=post.like_num+1
+        post.save()
+        GoodModel.objects.create(user=request.user,post=post,count=1)
+        return redirect(request.META['HTTP_REFERER'],pk=post.user.id)
+
 #<a href="{% url 'good' post.pk %}" type="button" class="btn btn-primary">いいね: {{post.like_num}}</a>
 
