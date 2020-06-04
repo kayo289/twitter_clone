@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
@@ -38,6 +39,7 @@ def loginfunc(request):
             return redirect('login')# ログイン成功後の遷移先
     return render(request,'login.html')
 
+@login_required
 def index_post(request):
     items = FollowModel.objects.filter(user=request.user)
     follow_users = []
