@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
@@ -45,21 +45,29 @@ def index_post(request):
     return render(request, 'list.html', params)
 #mypage
 def mypage(request,pk):
-    # if pk==request.user.id:
+   
     user=User.objects.get(id=pk)
     params={
         'user' : User.objects.get(id=pk),
+        'profile':ProfileModel.objects.get(user=user),
         'current_user': request.user,
         'post':PostModel.objects.all().filter(user=user),
         'follow':FollowModel.objects.all().filter(user=user,follow_id=pk)
     }
     return render(request,'mypage.html', params)
-   # else :
-    #    other_profile = {
-     #       'objects_list' : PostModel.objects.get(pk=pk),
-      #      'object_follow':FollowModel.object.get(pk=pk)
-       # }
-        #return render(request,'otherpage.html', other_profile)
+
+
+def followfunc(request,pk):
+    user=User.objects.get(id=pk)
+    FollowModel.objects.create(user=user,follow_id=pk)
+    return redirect('mypage',pk=pk)
+    #return render(request,'follow.html', params)
+    
+def follow_delete(request,pk):
+    user=User.objects.get(id=pk)
+    FollowModel.objects.filter(follow_id=pk).delete()
+    return redirect('mypage',pk=pk)
+    #return render(request,'follow.html', params)
 
 #<a href="{% url 'good' post.pk %}" type="button" class="btn btn-primary">いいね: {{post.like_num}}</a>
 

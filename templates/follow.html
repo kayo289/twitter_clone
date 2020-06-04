@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'signup.css'%}"> {% endcomment %}
+{% endblock customcss %}
+
+{% block content %}
+<div class="bg-light">
+    <div class="container ">
+        <div class="row">
+            {%if follow%}
+                <a href="{% url 'mypage' user.pk %}" class="btn btn-primary">followしました</a>
+            {%else%}
+            {{user.id}}
+            <a href="{% url 'mypage' user.pk %}" class="btn btn-primary">follow外しました</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
