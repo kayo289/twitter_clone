@@ -11,6 +11,9 @@
       </ul>
       <ul class="navbar-nav" style="color:#ff0e29;">
             <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"><img src="/medi/logout.png" width="50" height="50" style="border-radius: 50%;"></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#" style="color:#272727;"> <img src="{{user.profile.profile_icon.url}}" width="50" height="50" style="border-radius: 50%;"> {{user.username}}</a>
             </li>
       </ul>
