@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.db.models import Q
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
 
 # Create your views here.
@@ -36,9 +37,14 @@ def loginfunc(request):
     return render(request,'login.html')
 
 def index_post(request):
-    posts = PostModel.objects.all()
+    items = FollowModel.objects.filter(user=request.user)
+    follow_users = []
+    for item in items:
+        follow_users.append(User.objects.get(id=item.follow_id)) 
+    local_posts = PostModel.objects.filter(Q(user__in=follow_users) | Q(user=request.user))
     params = {
-        'posts': PostModel.objects.all(),
+        'global_posts': PostModel.objects.all().order_by("-id"),
+        'local_posts' : local_posts.order_by("-id"),
         'current_user': request.user,
         'profile': ProfileModel.objects.get(user=request.user)
     }
