@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .models import PostModel, ProfileModel
+from .models import PostModel, ProfileModel,FollowModel,GoodModel
 
 # Create your views here.
 def signupfunc(request):
@@ -43,4 +43,46 @@ def index_post(request):
         'profile': ProfileModel.objects.get(user=request.user)
     }
     return render(request, 'list.html', params)
+#mypage
+def mypage(request,pk):
+   
+    user=User.objects.get(id=pk)
+    params={
+        'user' : User.objects.get(id=pk),
+        'profile':ProfileModel.objects.get(user=user),
+        'current_user': request.user,
+        'post':PostModel.objects.all().filter(user=user),
+        'follow':FollowModel.objects.all().filter(user=user,follow_id=pk)
+    }
+    return render(request,'mypage.html', params)
+
+
+def followfunc(request,pk):
+    user=User.objects.get(id=pk)
+    FollowModel.objects.create(user=user,follow_id=pk)
+    return redirect('mypage',pk=pk)
+    #return render(request,'follow.html', params)
+    
+def follow_delete(request,pk):
+    user=User.objects.get(id=pk)
+    FollowModel.objects.filter(follow_id=pk).delete()
+    return redirect('mypage',pk=pk)
+    #return render(request,'follow.html', params)
+
+def goodfunc(request,pk):
+    post=PostModel.objects.get(id=pk)
+    post2=GoodModel.objects.all().filter(post=post,user=request.user)
+    print(request)
+    if post2  :
+        post.like_num-=1 
+        post.save()
+        GoodModel.objects.filter(user=request.user,post=post,count=1).delete()
+        return redirect(request.META['HTTP_REFERER'],pk=post.user.id)
+    else :
+        post.like_num=post.like_num+1
+        post.save()
+        GoodModel.objects.create(user=request.user,post=post,count=1)
+        return redirect(request.META['HTTP_REFERER'],pk=post.user.id)
+
+#<a href="{% url 'good' post.pk %}" type="button" class="btn btn-primary">いいね: {{post.like_num}}</a>
 
