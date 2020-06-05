@@ -39,7 +39,7 @@
                     <li class="list-group-item">url:{{profile.url}}</li>
                 </ul>
                     {%if current_user.id is user.id %}
-                        <a href="#" class="btn btn-primary">プロフィールを編集する</a>
+                        <a href="{% url 'profile-edit' user.id %}" class="btn btn-primary">プロフィールを編集する</a>
                     {% else %}
                         {%if  follow %}
                             <a href="{% url 'follow_delete' user.pk %}" class="btn btn-primary">follow外す</a>
