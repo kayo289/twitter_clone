@@ -19,7 +19,7 @@
                 <a class="nav-link" href="{% url 'logout' %}"><img src="/medi/logout.png" width="50" height="50" style="border-radius: 50%;"></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"> <img src="{{current_user.profile.profile_icon.url}}" width="50" height="50" style="border-radius: 50%;"> {{current_user.username}}</a>
+                <a class="nav-link" href="{% url 'mypage' current_user.id %}" style="color:#272727;"> <img src="{{current_user.profile.profile_icon.url}}" width="50" height="50" style="border-radius: 50%;"> {{current_user.username}}</a>
             </li>
       </ul>
 {% endblock header %}
@@ -50,11 +50,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-                <div class="col-2">
-                  <button type="button" class="create-btn btn btn-primary rounded-circle p-0" onclick="location.href='{% url 'create' %}'">＋</button>
-                </div>
-                
+                </div>           
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -75,6 +71,7 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="create-btn btn btn-primary rounded-circle p-0" onclick="location.href='{% url 'create' %}'">+</button>
     </div>
 </div>
 
