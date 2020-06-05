@@ -1,0 +1,9 @@
+.h1{
+    padding: 30px;
+  }
+  
+  .container {
+    max-width: 960px;
+  }
+  
+  .lh-condensed { line-height: 1.25; }
