@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'list.css'%}">
+{% endblock customcss %}
+
+{% block header %}
+      <!-- この下の行に mr-auto クラスを付与するだけ -->
+      <ul class="navbar-nav mr-auto">　
+        <form class="form-inline" method="GET" action="{% url 'search' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Content" aria-label="Search" name="keyword">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a class="nav-link" href="{% url 'index_post' %}"><img src="/medi/icon.png" width="100" height="100" style="border-radius: 50%; margin-left:70px;"></a>
+      </ul>
+      <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"><img src="/medi/logout.png" width="50" height="50" style="border-radius: 50%;"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"> <img src="{{user.profile.profile_icon.url}}" width="50" height="50" style="border-radius: 50%;"> {{user.username}}</a>
+            </li>
+      </ul>
+{% endblock header %}
+
+{% block content %}
+<div class="container" >
+    <div class="row" style="padding-top:50px;">
+        <div class="col-6  offset-3">
+        <p style="color:"#7D7D7D">検索ヒット数:{{ posts.count }}</p>
+            {% for post in posts %}
+                <div class="card mb-4">
+                    {% if post.images %}
+                        <img src="{{post.images.url}}" class = "img-fluid"> 
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title"><img src="{{post.user.profile.profile_icon.url}}" width="40" height="40" style="border-radius: 50%;"> {{ post.user.username }}</h5>
+                        <p class="card-text">{{ post.content }}</p>
+                        <a href="{%url 'good' post.id %}" class="btn btn-primary">いいね:{{post.like_num}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-2">
+            <button type="button" class="create-btn btn btn-primary rounded-circle p-0" onclick="location.href='{% url 'create' %}'">＋</button>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

@@ -6,6 +6,7 @@ from django.db.models import Q
 from .models import PostModel, ProfileModel,FollowModel,GoodModel
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # Create your views here.
 def signupfunc(request):
@@ -111,3 +112,16 @@ def goodfunc(request,pk):
 
 #<a href="{% url 'good' post.pk %}" type="button" class="btn btn-primary">いいね: {{post.like_num}}</a>
 
+def search(request):
+    """ 検索機能の処理 """
+    keyword = request.GET.get('keyword')
+    print(keyword)
+    posts = PostModel.objects.filter(Q(content__icontains=keyword))
+    print(request.user)
+    print(posts)
+    params = {
+        'current_user': request.user,
+        'posts' : posts, 
+        'keyword': keyword,
+    }
+    return render(request, 'result.html', params)
