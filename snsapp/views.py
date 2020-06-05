@@ -7,6 +7,13 @@ from .models import PostModel, ProfileModel,FollowModel,GoodModel
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.views.generic import UpdateView
+
+class profile_edit(UpdateView):
+  template_name = 'profile-edit.html'
+  model = ProfileModel
+  fields = ('user','introduction','url','profile_icon')
+  success_url = reverse_lazy('mypage.html')
 
 # Create your views here.
 def signupfunc(request):
@@ -36,9 +43,9 @@ def loginfunc(request):
         user = authenticate(request, username=user_name, password=user_password)
         if user is not None:
             login(request, user)
-            return redirect('signup')
+            return redirect('index_post')
         else:
-            return redirect('index_post')# ログイン成功後の遷移先
+            return redirect('login')# ログイン成功後の遷移先
     return render(request,'login.html')
 def logoutfunc(request):
     logout(request)
