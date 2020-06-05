@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import PostModel, ProfileModel
 from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
 class profile_edit(UpdateView):
   template_name = 'profile-edit.html'
   model = ProfileModel
   fields = ('user','introduction','url','profile_icon')
+  success_url = reverse_lazy('mypage.html')
 
 # Create your views here.
 def signupfunc(request):
