@@ -1,10 +1,6 @@
 # twitter clone
 Created a twitter-like social network in Django to learn Django (team development)
 
-## view 
-
-![image](https://user-images.githubusercontent.com/39555606/115956020-75045500-a535-11eb-934e-33d653d4192c.png)
-
 ## usage
 1. django manage.py runserver
 
@@ -33,5 +29,6 @@ Django 3.0.6
 ### Database 
 * https://app.diagrams.net/#G1G8VnnqDl4WviYU-HXyPO1rh_hIYJllny  
 
-
+## view 
+![image](https://user-images.githubusercontent.com/39555606/115956020-75045500-a535-11eb-934e-33d653d4192c.png)
  
