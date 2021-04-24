@@ -5,7 +5,7 @@ Created a twitter-like social network in Django to learn Django (team developmen
 1. django manage.py runserver
 
 ## Environment
-Python 3.6.9 
+Python 3.6.9  
 Django 3.0.6 
 
 ## Features 
